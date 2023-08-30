@@ -3,7 +3,7 @@
            Visitor bilgilerine erisebilmeliyim.
 
     @API_US10_TC1
-    Scenario: /api/visitorsId endpoint'ine gecerli authorization bilgileri ve dogru data (id) iceren
+    Scenario: api/visitorsId endpoint'ine gecerli authorization bilgileri ve dogru data (id) iceren
     bir GET body gönderildiginde dönen status code'in 200 oldugu ve response body'deki
     message bilgisinin "Success" oldugu dogrulanmali
 
