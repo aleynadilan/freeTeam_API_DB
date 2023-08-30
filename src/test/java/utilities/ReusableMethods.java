@@ -1,5 +1,6 @@
 package utilities;
 
+import hooks.api.HooksApı;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -17,7 +18,7 @@ public class ReusableMethods {
                       .spec(spec)
                       .contentType(ContentType.JSON)
                       .header("Accept", "application/json")
-                      .headers("Authorization", "Bearer " + token)
+                      .headers("Authorization", "Bearer " + "iIJ1ukvKYYLJWELH7q9oHPYo48xti3")
                   .when()
                      .body(reqBody)
                      .get(fullPath);
@@ -26,5 +27,4 @@ public class ReusableMethods {
 
         return response;
     }
-
 }

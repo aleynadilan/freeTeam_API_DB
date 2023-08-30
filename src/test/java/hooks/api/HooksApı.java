@@ -18,6 +18,7 @@ public class HooksApı {
 
     }
 
+    /*
     @Before (order=1)
     public void beforeGenerateToken(){
 
@@ -25,5 +26,8 @@ public class HooksApı {
         System.out.println("token = " + token);
 
     }
+
+     */
+
 
 }
