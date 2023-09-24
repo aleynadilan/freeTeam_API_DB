@@ -19,90 +19,83 @@ import static org.hamcrest.Matchers.equalTo;
 public class Authentication {
     private static RequestSpecification spec;
 
-    public static String generateToken() {
+    public static String adminToken(){
 
         spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
 
-        spec.pathParams("pp1", "api", "pp2", "getToken");
+        spec.pathParams("pp1","api","pp2","getToken");
 
-        JSONObject reqBody = new JSONObject();
+        Map<String,Object> dataCredentials = new HashMap<>();
 
-        reqBody.put("email", ConfigReader.getProperty("email"));
-        reqBody.put("password", ConfigReader.getProperty("password"));
+        dataCredentials.put("email",ConfigReader.getProperty("adminUserName"));
+        dataCredentials.put("password",ConfigReader.getProperty("password"));
 
         Response response = given()
-                               .spec(spec)
-                               .contentType(ContentType.JSON)
-                           .when()
-                               .body(reqBody.toString())
-                               .post("/{pp1}/{pp2}");
+                .contentType(ContentType.JSON)
+                .spec(spec)
+                .when()
+                .body(dataCredentials)
+                .post("/{pp1}/{pp2}");
 
-        JsonPath resJP = response.jsonPath();
+        response.prettyPrint();
 
-        String token = resJP.getString("token");
+        JsonPath jsonResponse = response.jsonPath();
+
+        String token = jsonResponse.getString("token");
 
         return token;
     }
 
-    public static String generateToken1() {
+    public static String teacherToken(){
 
-        String url = "https://www.heallifehospital.com/api/getToken";
+        spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
 
-        Map<String,Object> reqBody = new HashMap<>();
+        spec.pathParams("pp1","api","pp2","getToken");
 
-        reqBody.put("email", "hatice.kubra.ceylan.admin@heallifehospital.com");
-        reqBody.put("password","heallife123");
+        Map<String,Object> dataCredentials = new HashMap<>();
 
-        Response response = given()
-                             .contentType(ContentType.JSON)
-                            .when()
-                             .body(reqBody)
-                             .post(url);
-
-        response.prettyPrint();
-
-        JsonPath token = response.jsonPath();
-
-        return token.getString("token");
-    }
-
-    public static void main(String[] args) {
-        System.out.println(generateToken1());
-    }
-
-    @Test
-    public void test01(){
-
-        String url = "https://www.heallifehospital.com/api/getToken";
-
-        Map<String,Object> reqBody = new HashMap<>();
-
-        reqBody.put("email", ConfigReader.getProperty("email"));
-        reqBody.put("password", ConfigReader.getProperty("password"));
+        dataCredentials.put("email",ConfigReader.getProperty("teacherUserName"));
+        dataCredentials.put("password",ConfigReader.getProperty("password"));
 
         Response response = given()
                 .contentType(ContentType.JSON)
+                .spec(spec)
                 .when()
-                .body(reqBody)
-                .get(url);
+                .body(dataCredentials)
+                .post("/{pp1}/{pp2}");
 
-        response
-                .then()
-                .assertThat()
-                .body("status", equalTo(200),
-                        "token",equalTo("M7yjLvpb9092mvAUMZJ9qXx6INERSv"),
-                        "userId",equalTo("597"));
+        response.prettyPrint();
+        JsonPath jsonResponse = response.jsonPath();
 
+        String token = jsonResponse.getString("token");
 
-
-        /*
-        {
-    "status": 200,
-    "token": ""M7yjLvpb9092mvAUMZJ9qXx6INERSv"",
-    "userId": "597",
-    "staff_designation_id": "1",
-    "Token_remaining_time": 511
-     }
-         */
+        return token;
     }
+
+    public static String studentToken(){
+
+        spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
+
+        spec.pathParams("pp1","apistudent","pp2","getToken");
+
+        Map<String,Object> dataCredentials = new HashMap<>();
+
+        dataCredentials.put("username",ConfigReader.getProperty("studentUserName"));
+        dataCredentials.put("password",ConfigReader.getProperty("password"));
+
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .spec(spec)
+                .when()
+                .body(dataCredentials)
+                .post("/{pp1}/{pp2}");
+
+        response.prettyPrint();
+        JsonPath jsonResponse = response.jsonPath();
+
+        String token = jsonResponse.getString("token");
+
+        return token;
+    }
+
 }

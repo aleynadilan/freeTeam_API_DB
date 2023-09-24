@@ -11,11 +11,10 @@ public class HooksApı {
     public static RequestSpecification spec;
     public static String token;
 
-    @Before (order=0)
-    public void setUp(){
+    @Before(order = 0)
+    public void setUpApi(){
 
         spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
-
     }
 
     /*
