@@ -23,4 +23,4 @@
 
       Given Api kullanicisi "api/visitorsPurposeList" path parametreleri set eder.
       When Api kullanicisi api visitorsPurposeList endpointden donen response kaydeder
-      Then Api kullanicisi api visitorsPurposeList end pointinden donen response body icindeki lists icerigi idsi 1 olanin datalarini dogrular
+      Then Api kullanicisi api visitorsPurposeList endpointinden donen response body icindeki lists icerigi idsi 1 olanin datalarini dogrular
