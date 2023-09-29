@@ -12,7 +12,7 @@ public class API_01 {
     @Given("Api kullanicisi {string} path parametreleri set eder.")
     public void api_kullanicisi_path_parametreleri_set_eder(String rawPaths) {
 
-        String[] paths = rawPaths.split("/"); // [api, visitorsPurposeId]
+        String[] paths = rawPaths.split("/"); // [api, visitorsPurposeDelete]
 
         System.out.println(Arrays.toString(paths));
 
@@ -26,7 +26,7 @@ public class API_01 {
 
             HooksApı.spec.pathParam(key, value);
 
-            tempPath.append(key + "}/{");
+            tempPath.append(key + "}/{"); // /{pp0}/{pp1}
         }
         tempPath.deleteCharAt(tempPath.lastIndexOf("/"));
         tempPath.deleteCharAt(tempPath.lastIndexOf("{"));
